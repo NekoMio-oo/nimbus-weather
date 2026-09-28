@@ -56,16 +56,16 @@ enum class WeatherCondition {
         fun fromText(text: String?): WeatherCondition {
             val value = text?.lowercase().orEmpty()
             return when {
-                THUNDER.any { value.contains(it) } -> THUNDERSTORM
-                SNOW.any { value.contains(it) } -> SNOW
-                FREEZING.any { value.contains(it) } -> FREEZING_RAIN
-                DRIZZLE.any { value.contains(it) } -> DRIZZLE
-                SHOWER.any { value.contains(it) } -> SHOWERS
-                RAIN.any { value.contains(it) } -> RAIN
-                FOG.any { value.contains(it) } -> FOG
-                OVERCAST.any { value.contains(it) } -> OVERCAST
-                CLOUD.any { value.contains(it) } -> PARTLY_CLOUDY
-                CLEAR.any { value.contains(it) } -> CLEAR
+                THUNDER_WORDS.any { value.contains(it) } -> THUNDERSTORM
+                SNOW_WORDS.any { value.contains(it) } -> SNOW
+                FREEZING_WORDS.any { value.contains(it) } -> FREEZING_RAIN
+                DRIZZLE_WORDS.any { value.contains(it) } -> DRIZZLE
+                SHOWER_WORDS.any { value.contains(it) } -> SHOWERS
+                RAIN_WORDS.any { value.contains(it) } -> RAIN
+                FOG_WORDS.any { value.contains(it) } -> FOG
+                OVERCAST_WORDS.any { value.contains(it) } -> OVERCAST
+                CLOUD_WORDS.any { value.contains(it) } -> PARTLY_CLOUDY
+                CLEAR_WORDS.any { value.contains(it) } -> CLEAR
                 else -> OVERCAST
             }
         }
@@ -77,15 +77,15 @@ enum class WeatherCondition {
             else -> false
         }
 
-        private val THUNDER = listOf("雷", "thunder")
-        private val SNOW = listOf("雪", "snow", "sleet", "blizzard")
-        private val FREEZING = listOf("冻雨", "freezing")
-        private val DRIZZLE = listOf("毛毛雨", "细雨", "drizzle")
-        private val SHOWER = listOf("阵雨", "shower")
-        private val RAIN = listOf("雨", "rain")
-        private val FOG = listOf("雾", "霾", "浮尘", "扬沙", "沙尘", "fog", "mist", "haze", "dust", "sand")
-        private val OVERCAST = listOf("阴", "overcast")
-        private val CLOUD = listOf("云", "cloud")
-        private val CLEAR = listOf("晴", "clear", "sunny")
+        private val THUNDER_WORDS = listOf("雷", "thunder")
+        private val SNOW_WORDS = listOf("雪", "snow", "sleet", "blizzard")
+        private val FREEZING_WORDS = listOf("冻雨", "freezing")
+        private val DRIZZLE_WORDS = listOf("毛毛雨", "细雨", "drizzle")
+        private val SHOWER_WORDS = listOf("阵雨", "shower")
+        private val RAIN_WORDS = listOf("雨", "rain")
+        private val FOG_WORDS = listOf("雾", "霾", "浮尘", "扬沙", "沙尘", "fog", "mist", "haze", "dust", "sand")
+        private val OVERCAST_WORDS = listOf("阴", "overcast")
+        private val CLOUD_WORDS = listOf("云", "cloud")
+        private val CLEAR_WORDS = listOf("晴", "clear", "sunny")
     }
 }
