@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Nimbus</string>
+
+    <!-- Actions -->
+    <string name="action_search">Search places</string>
+    <string name="action_back">Back</string>
+    <string name="action_retry">Retry</string>
+    <string name="action_clear">Clear</string>
+    <string name="action_remove_place">Remove %1$s</string>
+    <string name="action_switch_units">Switch temperature unit</string>
+    <string name="units_celsius">°C</string>
+    <string name="units_fahrenheit">°F</string>
+
+    <!-- Home -->
+    <string name="home_empty_title">Pick a place to begin</string>
+    <string name="home_empty_body">Search for any city in the world and Nimbus keeps its forecast a swipe away.</string>
+    <string name="home_empty_cta">Add a place</string>
+    <string name="home_feels_like">Feels like %1$s</string>
+    <string name="home_high_low">H %1$s · L %2$s</string>
+    <string name="home_updated_now">Updated just now</string>
+    <string name="home_updated_minutes">Updated %1$d min ago</string>
+    <string name="home_updated_hours">Updated %1$d h ago</string>
+    <string name="home_page_indicator">Place %1$d of %2$d</string>
+
+    <!-- Sections -->
+    <string name="section_hourly">Next 24 hours</string>
+    <string name="section_daily">7-day forecast</string>
+    <string name="hourly_now">Now</string>
+    <string name="day_today">Today</string>
+    <string name="daily_sunrise">Sunrise %1$s</string>
+    <string name="daily_sunset">Sunset %1$s</string>
+    <string name="daily_uv">UV %1$s</string>
+    <string name="daily_chance">%1$d%% chance of rain</string>
+
+    <!-- Metrics -->
+    <string name="metric_feels_like">Feels like</string>
+    <string name="metric_feels_like_warmer">Humidity makes it feel warmer</string>
+    <string name="metric_feels_like_cooler">Wind makes it feel cooler</string>
+    <string name="metric_feels_like_same">About the same as the air</string>
+    <string name="metric_humidity">Humidity</string>
+    <string name="metric_humidity_caption">Relative humidity</string>
+    <string name="metric_wind">Wind</string>
+    <string name="metric_wind_caption">From the %1$s</string>
+    <string name="metric_uv">UV index</string>
+    <string name="metric_pressure">Pressure</string>
+    <string name="metric_pressure_caption">Surface pressure</string>
+    <string name="metric_precipitation">Precipitation</string>
+    <string name="metric_precipitation_caption">%1$d%% chance today</string>
+    <string name="uv_low">Low</string>
+    <string name="uv_moderate">Moderate</string>
+    <string name="uv_high">High</string>
+    <string name="uv_very_high">Very high</string>
+    <string name="uv_extreme">Extreme</string>
+
+    <!-- Sun -->
+    <string name="sun_sunrise">Sunrise</string>
+    <string name="sun_sunset">Sunset</string>
+    <string name="sun_daylight">%1$s of daylight</string>
+    <string name="duration_hours_minutes">%1$dh %2$dm</string>
+
+    <!-- Errors -->
+    <string name="error_offline_title">You are offline</string>
+    <string name="error_offline_body">Check your connection, then try again.</string>
+    <string name="error_timeout_title">That took too long</string>
+    <string name="error_timeout_body">The forecast did not arrive in time. Try again in a moment.</string>
+    <string name="error_server_title">Weather service error</string>
+    <string name="error_server_body">Open-Meteo answered with status %1$d.</string>
+    <string name="error_unknown_title">Something went wrong</string>
+    <string name="error_unknown_body">The forecast could not be loaded.</string>
+    <string name="error_stale">Showing the last saved forecast.</string>
+
+    <!-- Search -->
+    <string name="search_title">Places</string>
+    <string name="search_hint">Search for a city</string>
+    <string name="search_saved">Saved places</string>
+    <string name="search_results">Results</string>
+    <string name="search_idle">Type at least two letters to search the world.</string>
+    <string name="search_searching">Searching…</string>
+    <string name="search_empty">No places match “%1$s”.</string>
+
+    <!-- Conditions (WMO weather interpretation codes) -->
+    <string name="condition_clear">Clear sky</string>
+    <string name="condition_clear_night">Clear night</string>
+    <string name="condition_mainly_clear">Mainly clear</string>
+    <string name="condition_partly_cloudy">Partly cloudy</string>
+    <string name="condition_overcast">Overcast</string>
+    <string name="condition_fog">Fog</string>
+    <string name="condition_drizzle">Drizzle</string>
+    <string name="condition_rain">Rain</string>
+    <string name="condition_freezing_rain">Freezing rain</string>
+    <string name="condition_snow">Snow</string>
+    <string name="condition_showers">Showers</string>
+    <string name="condition_thunderstorm">Thunderstorm</string>
+
+    <string name="attribution">Weather data by Open-Meteo.com</string>
+</resources>
