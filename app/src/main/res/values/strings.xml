@@ -26,12 +26,48 @@
     <!-- Sections -->
     <string name="section_hourly">Next 24 hours</string>
     <string name="section_daily">7-day forecast</string>
+    <string name="section_minutely">Minutely precipitation</string>
+    <string name="section_air_quality">Air quality</string>
+    <string name="section_life_indices">Life indices</string>
     <string name="hourly_now">Now</string>
     <string name="day_today">Today</string>
     <string name="daily_sunrise">Sunrise %1$s</string>
     <string name="daily_sunset">Sunset %1$s</string>
     <string name="daily_uv">UV %1$s</string>
     <string name="daily_chance">%1$d%% chance of rain</string>
+
+    <!-- Minutely precipitation -->
+    <string name="minutely_peak">Peak intensity %1$s</string>
+
+    <!-- Air quality -->
+    <string name="aqi_primary">Main pollutant %1$s</string>
+    <string name="aqi_unknown">Air quality</string>
+    <string name="pollutant_pm25">PM2.5</string>
+    <string name="pollutant_pm10">PM10</string>
+    <string name="pollutant_o3">O₃</string>
+    <string name="pollutant_no2">NO₂</string>
+    <string name="pollutant_so2">SO₂</string>
+    <string name="pollutant_co">CO</string>
+
+    <!-- Life indices -->
+    <string name="life_index_clothing">Clothing</string>
+    <string name="life_index_comfort">Comfort</string>
+    <string name="life_index_umbrella">Umbrella</string>
+    <string name="life_index_uv">UV protection</string>
+    <string name="life_index_exercise">Exercise</string>
+    <string name="life_index_car_wash">Car wash</string>
+    <string name="life_index_cold_risk">Cold risk</string>
+    <string name="life_index_allergy">Allergy</string>
+    <string name="life_index_drying">Drying</string>
+    <string name="life_index_air_conditioner">Air conditioning</string>
+    <string name="life_index_travel">Travel</string>
+    <string name="life_index_sunscreen">Sunscreen</string>
+    <string name="life_index_air_purifier">Air purifier</string>
+    <string name="life_index_pollen">Pollen</string>
+    <string name="life_index_fishing">Fishing</string>
+    <string name="life_index_traffic">Traffic</string>
+    <string name="life_index_mood">Mood</string>
+    <string name="life_index_beer">Beer</string>
 
     <!-- Metrics -->
     <string name="metric_feels_like">Feels like</string>
@@ -47,6 +83,10 @@
     <string name="metric_pressure_caption">Surface pressure</string>
     <string name="metric_precipitation">Precipitation</string>
     <string name="metric_precipitation_caption">%1$d%% chance today</string>
+    <string name="metric_visibility">Visibility</string>
+    <string name="metric_visibility_caption">How far you can see</string>
+    <string name="metric_cloud">Cloud cover</string>
+    <string name="metric_cloud_caption">Share of sky covered</string>
     <string name="uv_low">Low</string>
     <string name="uv_moderate">Moderate</string>
     <string name="uv_high">High</string>
@@ -65,7 +105,7 @@
     <string name="error_timeout_title">That took too long</string>
     <string name="error_timeout_body">The forecast did not arrive in time. Try again in a moment.</string>
     <string name="error_server_title">Weather service error</string>
-    <string name="error_server_body">Open-Meteo answered with status %1$d.</string>
+    <string name="error_server_body">uapis.cn answered with status %1$d.</string>
     <string name="error_unknown_title">Something went wrong</string>
     <string name="error_unknown_body">The forecast could not be loaded.</string>
     <string name="error_stale">Showing the last saved forecast.</string>
@@ -93,5 +133,5 @@
     <string name="condition_showers">Showers</string>
     <string name="condition_thunderstorm">Thunderstorm</string>
 
-    <string name="attribution">Weather data by Open-Meteo.com</string>
+    <string name="attribution">Weather data by uapis.cn</string>
 </resources>

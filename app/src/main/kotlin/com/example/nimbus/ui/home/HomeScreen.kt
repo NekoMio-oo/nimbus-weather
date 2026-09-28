@@ -306,26 +306,41 @@ fun ForecastContent(
         item(key = "hero") {
             EnterAnimated(0) { HeroSection(forecast, unitSystem, now.toInstant()) }
         }
+        forecast.minutely?.let { minutely ->
+            item(key = "minutely") {
+                EnterAnimated(1) { MinutelyPrecipitationCard(minutely, unitSystem) }
+            }
+        }
         item(key = "hourly") {
-            EnterAnimated(1) {
+            EnterAnimated(2) {
                 SectionCard(stringResource(R.string.section_hourly)) {
                     HourlyTimeline(forecast, unitSystem)
                 }
             }
         }
         item(key = "daily") {
-            EnterAnimated(2) {
+            EnterAnimated(3) {
                 SectionCard(stringResource(R.string.section_daily)) {
                     DailyForecastList(forecast.daily, unitSystem, today = now.toLocalDate())
                 }
             }
         }
+        forecast.airQuality?.let { air ->
+            item(key = "air") {
+                EnterAnimated(4) { AirQualityCard(air) }
+            }
+        }
         item(key = "metrics") {
-            EnterAnimated(3) { MetricsGrid(forecast.current, today, unitSystem) }
+            EnterAnimated(5) { MetricsGrid(forecast.current, today, unitSystem) }
+        }
+        if (forecast.lifeIndices.isNotEmpty()) {
+            item(key = "life") {
+                EnterAnimated(6) { LifeIndicesCard(forecast.lifeIndices) }
+            }
         }
         if (today != null) {
             item(key = "sun") {
-                EnterAnimated(4) { SunCard(today, now.toLocalTime()) }
+                EnterAnimated(7) { SunCard(today, now.toLocalTime()) }
             }
         }
         item(key = "attribution") {

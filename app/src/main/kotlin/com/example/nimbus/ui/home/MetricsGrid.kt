@@ -47,7 +47,7 @@ import com.example.nimbus.ui.preview.PreviewData
 import com.example.nimbus.ui.theme.NimbusTheme
 import com.example.nimbus.util.Formatters
 
-/** Six detail cards in two columns: feels like, humidity, wind, UV, pressure, precipitation. */
+/** Eight detail cards in two columns: feels like, humidity, wind, UV, pressure, precipitation, visibility, cloud. */
 @Composable
 fun MetricsGrid(
     current: CurrentConditions,
@@ -98,8 +98,30 @@ fun MetricsGrid(
                 modifier = Modifier.weight(1f),
             )
         }
+        // Visibility and cloud cover come with the extended fields, which the service may omit; the row
+        // stays balanced by filling the empty half with a spacer.
+        val extras = buildList {
+            current.visibilityKm?.let { add(ExtraMetric(R.string.metric_visibility, Formatters.visibility(it, unitSystem), R.string.metric_visibility_caption)) }
+            current.cloudPercent?.let { add(ExtraMetric(R.string.metric_cloud, "$it%", R.string.metric_cloud_caption)) }
+        }
+        if (extras.isNotEmpty()) {
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                extras.forEach { extra ->
+                    MetricCard(
+                        title = stringResource(extra.title),
+                        value = extra.value,
+                        caption = stringResource(extra.caption),
+                        modifier = Modifier.weight(1f),
+                    )
+                }
+                repeat(2 - extras.size) { Spacer(Modifier.weight(1f)) }
+            }
+        }
     }
 }
+
+/** A metric the service only sometimes sends, held as resource ids until it reaches the screen. */
+private data class ExtraMetric(val title: Int, val value: String, val caption: Int)
 
 @Composable
 private fun feelsLikeCaption(current: CurrentConditions): String {

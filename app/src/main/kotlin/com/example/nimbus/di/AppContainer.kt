@@ -2,8 +2,10 @@ package com.example.nimbus.di
 
 import android.content.Context
 import com.example.nimbus.data.local.LocalStore
+import com.example.nimbus.data.remote.GeocodingApi
 import com.example.nimbus.data.remote.HttpClient
-import com.example.nimbus.data.remote.OpenMeteoApi
+import com.example.nimbus.data.remote.OpenMeteoGeocodingApi
+import com.example.nimbus.data.remote.UapiWeatherApi
 import com.example.nimbus.data.remote.WeatherApi
 import com.example.nimbus.data.repository.PlacesRepositoryImpl
 import com.example.nimbus.data.repository.SettingsRepositoryImpl
@@ -33,12 +35,20 @@ class AppContainer(context: Context) {
         coerceInputValues = true
     }
 
-    private val api: WeatherApi = OpenMeteoApi(
+    // Read on each call so a per-app language change is picked up. The geocoder takes any language and
+    // falls back to English; the weather service only knows Chinese and English.
+    private val appLanguage: () -> String = { context.resources.configuration.locales[0].language }
+
+    private val geocodingApi: GeocodingApi = OpenMeteoGeocodingApi(
         http = HttpClient(),
         json = json,
-        // Read on each search so a per-app language change is picked up; Open-Meteo falls back to English
-        // for languages it does not translate into.
-        language = { context.resources.configuration.locales[0].language },
+        language = appLanguage,
+    )
+
+    private val weatherApi: WeatherApi = UapiWeatherApi(
+        http = HttpClient(),
+        json = json,
+        apiKey = UAPI_WEATHER_KEY,
     )
 
     private val store = LocalStore(
@@ -46,8 +56,12 @@ class AppContainer(context: Context) {
         json,
     )
 
-    val placesRepository: PlacesRepository = PlacesRepositoryImpl(api, store)
-    val weatherRepository: WeatherRepository = WeatherRepositoryImpl(api, store)
+    val placesRepository: PlacesRepository = PlacesRepositoryImpl(geocodingApi, store)
+    val weatherRepository: WeatherRepository = WeatherRepositoryImpl(
+        api = weatherApi,
+        store = store,
+        language = { if (appLanguage() == "zh") "zh" else "en" },
+    )
     val settingsRepository: SettingsRepository = SettingsRepositoryImpl(store)
 
     val observeSavedPlaces = ObserveSavedPlacesUseCase(placesRepository)
@@ -60,5 +74,8 @@ class AppContainer(context: Context) {
 
     private companion object {
         const val PREFS_NAME = "nimbus"
+
+        /** UApiPro's key for the `/misc/weather` endpoint, sent as the `key` query parameter. */
+        const val UAPI_WEATHER_KEY = "uapi-1s7voejsD_8357IEPHBlYxvFPJDQuzY6eGEQ94Qh"
     }
 }

@@ -19,6 +19,10 @@ data class CurrentConditions(
     val windDirectionDegrees: Int,
     val pressureHpa: Double,
     val uvIndex: Double,
+    /** Horizontal visibility in kilometres, when the service reports it. */
+    val visibilityKm: Double?,
+    /** Share of the sky under cloud, 0–100, when the service reports it. */
+    val cloudPercent: Int?,
 )
 
 /** One hour of the forecast, in the place's local time. */
@@ -49,6 +53,12 @@ data class Forecast(
     val current: CurrentConditions,
     val hourly: List<HourlyForecast>,
     val daily: List<DailyForecast>,
+    /** Minute-level precipitation, absent for places the service does not cover. */
+    val minutely: MinutelyPrecipitation?,
+    /** The air quality index and pollutant concentrations. */
+    val airQuality: AirQuality?,
+    /** The daily life indices (dressing, UV, car washing, …). */
+    val lifeIndices: List<LifeIndex>,
     val fetchedAt: Instant,
 ) {
     val today: DailyForecast? get() = daily.firstOrNull()

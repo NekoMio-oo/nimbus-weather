@@ -35,6 +35,8 @@ fun ForecastSkeleton(modifier: Modifier = Modifier) {
         Spacer(Modifier.height(8.dp))
         ShimmerBox(Modifier.width(200.dp).height(18.dp))
         Spacer(Modifier.height(28.dp))
+        ShimmerBox(Modifier.fillMaxWidth().height(150.dp))
+        Spacer(Modifier.height(14.dp))
         ShimmerBox(Modifier.fillMaxWidth().height(196.dp))
         Spacer(Modifier.height(14.dp))
         ShimmerBox(Modifier.fillMaxWidth().height(340.dp))

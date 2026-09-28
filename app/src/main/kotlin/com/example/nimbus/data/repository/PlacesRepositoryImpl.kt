@@ -1,14 +1,14 @@
 package com.example.nimbus.data.repository
 
 import com.example.nimbus.data.local.LocalStore
-import com.example.nimbus.data.remote.WeatherApi
+import com.example.nimbus.data.remote.GeocodingApi
 import com.example.nimbus.domain.model.Place
 import com.example.nimbus.domain.repository.PlacesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class PlacesRepositoryImpl(
-    private val api: WeatherApi,
+    private val api: GeocodingApi,
     private val store: LocalStore,
 ) : PlacesRepository {
 

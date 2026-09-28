@@ -58,6 +58,15 @@ object Formatters {
         if (unitSystem == UnitSystem.METRIC) "${oneDecimal(mm)} mm"
         else "${twoDecimals(mm / MM_PER_INCH)} in"
 
+    /** The intensity of falling rain, in the unit the source reports it: millimetres per hour. */
+    fun rainIntensity(mmPerHour: Double, unitSystem: UnitSystem): String =
+        if (unitSystem == UnitSystem.METRIC) "${oneDecimal(mmPerHour)} mm/h"
+        else "${twoDecimals(mmPerHour / MM_PER_INCH)} in/h"
+
+    fun visibility(km: Double, unitSystem: UnitSystem): String =
+        if (unitSystem == UnitSystem.METRIC) "${km.roundToInt()} km"
+        else "${(km * KM_TO_MILES).roundToInt()} mi"
+
     fun pressure(hpa: Double, unitSystem: UnitSystem): String =
         if (unitSystem == UnitSystem.METRIC) "${hpa.roundToInt()} hPa"
         else "${oneDecimal(hpa * HPA_TO_INHG)} inHg"

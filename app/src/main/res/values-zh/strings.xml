@@ -26,12 +26,48 @@
     <!-- 分区 -->
     <string name="section_hourly">未来 24 小时</string>
     <string name="section_daily">7 天预报</string>
+    <string name="section_minutely">分钟级降水</string>
+    <string name="section_air_quality">空气质量</string>
+    <string name="section_life_indices">生活指数</string>
     <string name="hourly_now">现在</string>
     <string name="day_today">今天</string>
     <string name="daily_sunrise">日出 %1$s</string>
     <string name="daily_sunset">日落 %1$s</string>
     <string name="daily_uv">紫外线 %1$s</string>
     <string name="daily_chance">降雨概率 %1$d%%</string>
+
+    <!-- 分钟级降水 -->
+    <string name="minutely_peak">最强降水强度 %1$s</string>
+
+    <!-- 空气质量 -->
+    <string name="aqi_primary">主要污染物 %1$s</string>
+    <string name="aqi_unknown">空气质量</string>
+    <string name="pollutant_pm25">PM2.5</string>
+    <string name="pollutant_pm10">PM10</string>
+    <string name="pollutant_o3">O₃</string>
+    <string name="pollutant_no2">NO₂</string>
+    <string name="pollutant_so2">SO₂</string>
+    <string name="pollutant_co">CO</string>
+
+    <!-- 生活指数 -->
+    <string name="life_index_clothing">穿衣</string>
+    <string name="life_index_comfort">舒适度</string>
+    <string name="life_index_umbrella">雨伞</string>
+    <string name="life_index_uv">紫外线防护</string>
+    <string name="life_index_exercise">运动</string>
+    <string name="life_index_car_wash">洗车</string>
+    <string name="life_index_cold_risk">感冒</string>
+    <string name="life_index_allergy">过敏</string>
+    <string name="life_index_drying">晾晒</string>
+    <string name="life_index_air_conditioner">空调</string>
+    <string name="life_index_travel">出行</string>
+    <string name="life_index_sunscreen">防晒</string>
+    <string name="life_index_air_purifier">空气净化</string>
+    <string name="life_index_pollen">花粉</string>
+    <string name="life_index_fishing">钓鱼</string>
+    <string name="life_index_traffic">交通</string>
+    <string name="life_index_mood">心情</string>
+    <string name="life_index_beer">啤酒</string>
 
     <!-- 指标 -->
     <string name="metric_feels_like">体感温度</string>
@@ -47,6 +83,10 @@
     <string name="metric_pressure_caption">地面气压</string>
     <string name="metric_precipitation">降水量</string>
     <string name="metric_precipitation_caption">今天降水概率 %1$d%%</string>
+    <string name="metric_visibility">能见度</string>
+    <string name="metric_visibility_caption">可看到的距离</string>
+    <string name="metric_cloud">云量</string>
+    <string name="metric_cloud_caption">天空被云覆盖的比例</string>
     <string name="uv_low">低</string>
     <string name="uv_moderate">中等</string>
     <string name="uv_high">高</string>
@@ -65,7 +105,7 @@
     <string name="error_timeout_title">请求超时</string>
     <string name="error_timeout_body">天气数据未能及时返回，请稍后再试。</string>
     <string name="error_server_title">天气服务出错</string>
-    <string name="error_server_body">Open-Meteo 返回了状态码 %1$d。</string>
+    <string name="error_server_body">uapis.cn 返回了状态码 %1$d。</string>
     <string name="error_unknown_title">出了点问题</string>
     <string name="error_unknown_body">无法加载天气数据。</string>
     <string name="error_stale">当前显示的是上次保存的预报。</string>
@@ -93,5 +133,5 @@
     <string name="condition_showers">阵雨</string>
     <string name="condition_thunderstorm">雷阵雨</string>
 
-    <string name="attribution">天气数据来自 Open-Meteo.com</string>
+    <string name="attribution">天气数据来自 uapis.cn</string>
 </resources>

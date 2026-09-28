@@ -3,52 +3,40 @@ package com.example.nimbus.data.remote
 import kotlinx.serialization.json.Json
 import java.net.URLEncoder
 
-/** The remote weather service, as the repositories see it. */
+/** The weather service, as the repository sees it: one JSON answer per city. */
 interface WeatherApi {
-    suspend fun searchPlaces(query: String, count: Int = 8): GeocodingResponse
-
-    suspend fun forecast(latitude: Double, longitude: Double): ForecastResponse
+    suspend fun forecast(city: String, language: String): WeatherResponse
 }
 
 /**
- * Open-Meteo (https://open-meteo.com): free for non-commercial use, no API key. The forecast query asks for
- * exactly the fields the DTOs declare, with times in the place's own zone (`timezone=auto`); the geocoding
- * query asks for results in the reader's language, so a Chinese user searching "beijing" gets "北京".
+ * UApiPro (https://uapis.cn), a Chinese weather aggregator. Its `/misc/weather` endpoint is asked for every
+ * optional block at once — extended metrics, the 7-day forecast, the 24-hour forecast, the minute-level
+ * precipitation and the life indices — so a single request fills the whole screen. The service locates by
+ * city name (`adcode` is the other option), not coordinates, and returns the city's own local wall-clock
+ * times, so the place's IANA zone is only needed to label them.
+ *
+ * [language] is `zh` or `en`; anything else the app ships falls back to `en`.
  */
-class OpenMeteoApi(
+class UapiWeatherApi(
     private val http: HttpClient,
     private val json: Json,
-    private val language: () -> String = { "en" },
+    private val apiKey: String,
 ) : WeatherApi {
 
-    override suspend fun searchPlaces(query: String, count: Int): GeocodingResponse {
-        val url = "$GEOCODING_BASE/v1/search?name=${encode(query)}&count=$count" +
-            "&language=${encode(language())}&format=json"
-        return json.decodeFromString(GeocodingResponse.serializer(), http.get(url))
-    }
-
-    override suspend fun forecast(latitude: Double, longitude: Double): ForecastResponse {
+    override suspend fun forecast(city: String, language: String): WeatherResponse {
         val url = buildString {
-            append(FORECAST_BASE).append("/v1/forecast")
-            append("?latitude=").append(latitude)
-            append("&longitude=").append(longitude)
-            append("&current=").append(CURRENT_FIELDS)
-            append("&hourly=").append(HOURLY_FIELDS)
-            append("&daily=").append(DAILY_FIELDS)
-            append("&timezone=auto&forecast_days=7&forecast_hours=24")
+            append(BASE).append("/api/v1/misc/weather")
+            append("?city=").append(encode(city))
+            append("&extended=true&forecast=true&hourly=true&minutely=true&indices=true")
+            append("&lang=").append(encode(language))
+            append("&key=").append(encode(apiKey))
         }
-        return json.decodeFromString(ForecastResponse.serializer(), http.get(url))
+        return json.decodeFromString(WeatherResponse.serializer(), http.get(url))
     }
 
     private fun encode(value: String): String = URLEncoder.encode(value, "UTF-8")
 
     private companion object {
-        const val GEOCODING_BASE = "https://geocoding-api.open-meteo.com"
-        const val FORECAST_BASE = "https://api.open-meteo.com"
-        const val CURRENT_FIELDS = "temperature_2m,relative_humidity_2m,apparent_temperature,is_day," +
-            "precipitation,weather_code,wind_speed_10m,wind_direction_10m,surface_pressure,uv_index"
-        const val HOURLY_FIELDS = "temperature_2m,weather_code,precipitation_probability"
-        const val DAILY_FIELDS = "weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset," +
-            "precipitation_probability_max,uv_index_max"
+        const val BASE = "https://uapis.cn"
     }
 }

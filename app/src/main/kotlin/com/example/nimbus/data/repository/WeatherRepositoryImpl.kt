@@ -16,6 +16,7 @@ import java.time.Instant
 class WeatherRepositoryImpl(
     private val api: WeatherApi,
     private val store: LocalStore,
+    private val language: () -> String = { "en" },
 ) : WeatherRepository {
 
     override fun cached(place: Place): Forecast? {
@@ -26,7 +27,7 @@ class WeatherRepositoryImpl(
     }
 
     override suspend fun fetch(place: Place): Forecast {
-        val response = networkCall { api.forecast(place.latitude, place.longitude) }
+        val response = networkCall { api.forecast(place.name, language()) }
         val fetchedAt = Instant.now()
         store.writeCachedForecast(place.id, CachedForecast(fetchedAt.toEpochMilli(), response))
         return response.toDomain(place, fetchedAt)
