@@ -33,7 +33,13 @@ class AppContainer(context: Context) {
         coerceInputValues = true
     }
 
-    private val api: WeatherApi = OpenMeteoApi(HttpClient(), json)
+    private val api: WeatherApi = OpenMeteoApi(
+        http = HttpClient(),
+        json = json,
+        // Read on each search so a per-app language change is picked up; Open-Meteo falls back to English
+        // for languages it does not translate into.
+        language = { context.resources.configuration.locales[0].language },
+    )
 
     private val store = LocalStore(
         context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE),

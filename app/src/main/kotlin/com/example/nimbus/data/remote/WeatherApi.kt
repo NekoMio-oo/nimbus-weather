@@ -12,15 +12,18 @@ interface WeatherApi {
 
 /**
  * Open-Meteo (https://open-meteo.com): free for non-commercial use, no API key. The forecast query asks for
- * exactly the fields the DTOs declare, with times in the place's own zone (`timezone=auto`).
+ * exactly the fields the DTOs declare, with times in the place's own zone (`timezone=auto`); the geocoding
+ * query asks for results in the reader's language, so a Chinese user searching "beijing" gets "北京".
  */
 class OpenMeteoApi(
     private val http: HttpClient,
     private val json: Json,
+    private val language: () -> String = { "en" },
 ) : WeatherApi {
 
     override suspend fun searchPlaces(query: String, count: Int): GeocodingResponse {
-        val url = "$GEOCODING_BASE/v1/search?name=${encode(query)}&count=$count&language=en&format=json"
+        val url = "$GEOCODING_BASE/v1/search?name=${encode(query)}&count=$count" +
+            "&language=${encode(language())}&format=json"
         return json.decodeFromString(GeocodingResponse.serializer(), http.get(url))
     }
 

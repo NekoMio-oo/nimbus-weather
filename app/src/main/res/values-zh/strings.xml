@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Nimbus 天气</string>
+
+    <!-- 操作 -->
+    <string name="action_search">搜索地点</string>
+    <string name="action_back">返回</string>
+    <string name="action_retry">重试</string>
+    <string name="action_clear">清除</string>
+    <string name="action_remove_place">移除 %1$s</string>
+    <string name="action_switch_units">切换温度单位</string>
+    <string name="units_celsius">°C</string>
+    <string name="units_fahrenheit">°F</string>
+
+    <!-- 首页 -->
+    <string name="home_empty_title">先添加一个地点</string>
+    <string name="home_empty_body">搜索世界上的任意城市，Nimbus 会一直为你保留它的天气。</string>
+    <string name="home_empty_cta">添加地点</string>
+    <string name="home_feels_like">体感 %1$s</string>
+    <string name="home_high_low">最高 %1$s · 最低 %2$s</string>
+    <string name="home_updated_now">刚刚更新</string>
+    <string name="home_updated_minutes">%1$d 分钟前更新</string>
+    <string name="home_updated_hours">%1$d 小时前更新</string>
+    <string name="home_page_indicator">第 %1$d 个地点，共 %2$d 个</string>
+
+    <!-- 分区 -->
+    <string name="section_hourly">未来 24 小时</string>
+    <string name="section_daily">7 天预报</string>
+    <string name="hourly_now">现在</string>
+    <string name="day_today">今天</string>
+    <string name="daily_sunrise">日出 %1$s</string>
+    <string name="daily_sunset">日落 %1$s</string>
+    <string name="daily_uv">紫外线 %1$s</string>
+    <string name="daily_chance">降雨概率 %1$d%%</string>
+
+    <!-- 指标 -->
+    <string name="metric_feels_like">体感温度</string>
+    <string name="metric_feels_like_warmer">湿度让它感觉更热</string>
+    <string name="metric_feels_like_cooler">风让它感觉更凉</string>
+    <string name="metric_feels_like_same">与实际气温接近</string>
+    <string name="metric_humidity">湿度</string>
+    <string name="metric_humidity_caption">相对湿度</string>
+    <string name="metric_wind">风速</string>
+    <string name="metric_wind_caption">来自 %1$s 方向</string>
+    <string name="metric_uv">紫外线指数</string>
+    <string name="metric_pressure">气压</string>
+    <string name="metric_pressure_caption">地面气压</string>
+    <string name="metric_precipitation">降水量</string>
+    <string name="metric_precipitation_caption">今天降水概率 %1$d%%</string>
+    <string name="uv_low">低</string>
+    <string name="uv_moderate">中等</string>
+    <string name="uv_high">高</string>
+    <string name="uv_very_high">很高</string>
+    <string name="uv_extreme">极高</string>
+
+    <!-- 太阳 -->
+    <string name="sun_sunrise">日出</string>
+    <string name="sun_sunset">日落</string>
+    <string name="sun_daylight">日照时长 %1$s</string>
+    <string name="duration_hours_minutes">%1$d 小时 %2$d 分</string>
+
+    <!-- 错误 -->
+    <string name="error_offline_title">网络未连接</string>
+    <string name="error_offline_body">请检查网络连接，然后重试。</string>
+    <string name="error_timeout_title">请求超时</string>
+    <string name="error_timeout_body">天气数据未能及时返回，请稍后再试。</string>
+    <string name="error_server_title">天气服务出错</string>
+    <string name="error_server_body">Open-Meteo 返回了状态码 %1$d。</string>
+    <string name="error_unknown_title">出了点问题</string>
+    <string name="error_unknown_body">无法加载天气数据。</string>
+    <string name="error_stale">当前显示的是上次保存的预报。</string>
+
+    <!-- 搜索 -->
+    <string name="search_title">地点</string>
+    <string name="search_hint">搜索城市</string>
+    <string name="search_saved">已保存的地点</string>
+    <string name="search_results">搜索结果</string>
+    <string name="search_idle">输入至少两个字符即可搜索全球城市。</string>
+    <string name="search_searching">搜索中…</string>
+    <string name="search_empty">没有找到与“%1$s”匹配的地点。</string>
+
+    <!-- 天气状况（WMO 天气代码） -->
+    <string name="condition_clear">晴</string>
+    <string name="condition_clear_night">晴夜</string>
+    <string name="condition_mainly_clear">大致晴朗</string>
+    <string name="condition_partly_cloudy">局部多云</string>
+    <string name="condition_overcast">阴</string>
+    <string name="condition_fog">雾</string>
+    <string name="condition_drizzle">毛毛雨</string>
+    <string name="condition_rain">雨</string>
+    <string name="condition_freezing_rain">冻雨</string>
+    <string name="condition_snow">雪</string>
+    <string name="condition_showers">阵雨</string>
+    <string name="condition_thunderstorm">雷阵雨</string>
+
+    <string name="attribution">天气数据来自 Open-Meteo.com</string>
+</resources>

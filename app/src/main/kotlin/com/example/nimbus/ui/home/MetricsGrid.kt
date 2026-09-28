@@ -41,6 +41,7 @@ import com.example.nimbus.R
 import com.example.nimbus.domain.model.CurrentConditions
 import com.example.nimbus.domain.model.DailyForecast
 import com.example.nimbus.domain.model.UnitSystem
+import com.example.nimbus.ui.components.compassLabel
 import com.example.nimbus.ui.components.uvLabel
 import com.example.nimbus.ui.preview.PreviewData
 import com.example.nimbus.ui.theme.NimbusTheme
@@ -73,7 +74,7 @@ fun MetricsGrid(
             MetricCard(
                 title = stringResource(R.string.metric_wind),
                 value = Formatters.speed(current.windSpeedKmh, unitSystem),
-                caption = stringResource(R.string.metric_wind_caption, Formatters.compass(current.windDirectionDegrees)),
+                caption = stringResource(R.string.metric_wind_caption, compassLabel(current.windDirectionDegrees)),
                 modifier = Modifier.weight(1f),
             ) { WindArrow(current.windDirectionDegrees) }
             MetricCard(

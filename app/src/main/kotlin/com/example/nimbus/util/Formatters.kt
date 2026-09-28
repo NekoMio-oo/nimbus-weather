@@ -1,5 +1,7 @@
 package com.example.nimbus.util
 
+import android.content.Context
+import android.text.format.DateFormat
 import com.example.nimbus.domain.model.Place
 import com.example.nimbus.domain.model.UnitSystem
 import java.time.LocalDate
@@ -12,6 +14,34 @@ import kotlin.math.roundToInt
 
 /** Numbers and times as the screen shows them. Every value arrives metric and is converted here, once. */
 object Formatters {
+
+    // Declared before the formatters below: object properties initialise top to bottom, and the formatter
+    // builders read this pattern.
+    private val MINUTE_FIELD = Regex("[:：]?\\s?m{1,2}\\s?")
+    private const val KM_TO_MILES = 0.621371
+    private const val MM_PER_INCH = 25.4
+    private const val HPA_TO_INHG = 0.02953
+
+    // Time patterns are built from the app's locale and the device's 12/24-hour setting. Both can change
+    // while the process lives (a per-app language switch, a system time-format change), and building them
+    // once at class load would freeze the very first locale it saw, so [configure] rebuilds them.
+    private var locale: Locale = Locale.getDefault()
+    private var hourFormatter: DateTimeFormatter = buildHourFormatter(locale, use24Hour = false)
+    private var clockFormatter: DateTimeFormatter = buildClockFormatter(locale, use24Hour = false)
+    private var weekdayFormatter: DateTimeFormatter = buildWeekdayFormatter(locale)
+
+    /**
+     * Adopt the app's language and the device's clock convention. Called from the Activity before the first
+     * composition, and again whenever the Activity is recreated after a locale or setting change.
+     */
+    fun configure(context: Context) {
+        val configuration = context.resources.configuration
+        locale = configuration.locales[0]
+        val use24Hour = DateFormat.is24HourFormat(context)
+        hourFormatter = buildHourFormatter(locale, use24Hour)
+        clockFormatter = buildClockFormatter(locale, use24Hour)
+        weekdayFormatter = buildWeekdayFormatter(locale)
+    }
 
     fun celsiusIn(unitSystem: UnitSystem, celsius: Double): Double =
         if (unitSystem == UnitSystem.METRIC) celsius else celsius * 9.0 / 5.0 + 32.0
@@ -34,33 +64,44 @@ object Formatters {
 
     fun uvIndex(uv: Double): String = uv.roundToInt().toString()
 
-    /** "1 PM", in the device locale's clock convention. */
+    /** The hour of [time], in the app locale's clock convention, e.g. "1 PM" or "13". */
     fun hour(time: LocalDateTime): String = time.format(hourFormatter)
 
-    /** "5:47 AM". */
+    /** The time of day, e.g. "5:47 AM" or "05:47". */
     fun clock(time: LocalTime): String = time.format(clockFormatter)
 
-    /** "Mon". */
+    /** "Mon" / "周一". */
     fun weekday(date: LocalDate): String = date.format(weekdayFormatter)
 
-    /** A compass point for a meteorological wind direction in degrees. */
-    fun compass(degrees: Int): String {
-        val index = (((degrees % 360 + 360) % 360 + 22.5) / 45.0).toInt() % COMPASS_POINTS.size
-        return COMPASS_POINTS[index]
+    private fun oneDecimal(value: Double): String = String.format(locale, "%.1f", value)
+
+    private fun twoDecimals(value: Double): String = String.format(locale, "%.2f", value)
+
+    private fun buildHourFormatter(locale: Locale, use24Hour: Boolean): DateTimeFormatter =
+        DateTimeFormatter.ofPattern(timePattern(locale, use24Hour, withMinutes = false), locale)
+
+    private fun buildClockFormatter(locale: Locale, use24Hour: Boolean): DateTimeFormatter =
+        DateTimeFormatter.ofPattern(timePattern(locale, use24Hour, withMinutes = true), locale)
+
+    private fun buildWeekdayFormatter(locale: Locale): DateTimeFormatter =
+        DateTimeFormatter.ofPattern("EEE", locale)
+
+    /**
+     * The best time pattern for [locale], via the platform's CLDR data. The skeleton decides the fields;
+     * the locale decides their order and its day-period marker, which is why a Chinese 12-hour clock reads
+     * "上午8" and not the "8 上午" a hand-written "h a" pattern would produce.
+     */
+    private fun timePattern(locale: Locale, use24Hour: Boolean, withMinutes: Boolean): String {
+        val skeleton = when {
+            use24Hour && withMinutes -> "Hm"
+            use24Hour -> "H"
+            else -> "hm"
+        }
+        val pattern = DateFormat.getBestDateTimePattern(locale, skeleton)
+        // An hour-only 12-hour clock still needs the day-period marker, so start from "hm" and drop the
+        // minutes rather than asking for "h" alone, which carries no marker.
+        return if (!use24Hour && !withMinutes) MINUTE_FIELD.replace(pattern, "").trim() else pattern
     }
-
-    private fun oneDecimal(value: Double): String = String.format(Locale.getDefault(), "%.1f", value)
-
-    private fun twoDecimals(value: Double): String = String.format(Locale.getDefault(), "%.2f", value)
-
-    private val hourFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("h a", Locale.getDefault())
-    private val clockFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("h:mm a", Locale.getDefault())
-    private val weekdayFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("EEE", Locale.getDefault())
-
-    private val COMPASS_POINTS = arrayOf("N", "NE", "E", "SE", "S", "SW", "W", "NW")
-    private const val KM_TO_MILES = 0.621371
-    private const val MM_PER_INCH = 25.4
-    private const val HPA_TO_INHG = 0.02953
 }
 
 /** The place's zone, or the device zone when the geocoder gave one Java does not know. */

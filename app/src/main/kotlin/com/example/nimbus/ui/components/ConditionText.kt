@@ -1,6 +1,7 @@
 package com.example.nimbus.ui.components
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import com.example.nimbus.R
 import com.example.nimbus.domain.model.ForecastException
@@ -35,6 +36,17 @@ fun uvLabel(uv: Double): String = stringResource(
         else -> R.string.uv_extreme
     },
 )
+
+/**
+ * The compass point a meteorological direction (the direction the wind blows *from*) describes, in the
+ * reader's language. The eight points are a resource array so they can be translated with the rest of the UI.
+ */
+@Composable
+fun compassLabel(degrees: Int): String {
+    val points = stringArrayResource(R.array.compass_points)
+    val normalised = (degrees % 360 + 360) % 360
+    return points[((normalised + 22.5) / 45.0).toInt() % points.size]
+}
 
 @Composable
 fun ForecastException.title(): String = stringResource(
