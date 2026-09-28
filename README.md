@@ -7,9 +7,10 @@ with the weather.
 ## What it shows
 
 - **Clean architecture in one module.** `domain/` holds the models, repository interfaces and use cases and
-  knows nothing about Android or HTTP. `data/` implements them over uapis.cn (weather) and Open-Meteo
-  (geocoding) plus `SharedPreferences`. `ui/` renders state from view models. `di/AppContainer.kt` wires it
-  all by hand, so there is one place to swap a piece.
+  knows nothing about Android or HTTP. `data/` implements them over uapis.cn (weather, plus `/misc/district`
+  to resolve a place whose name the weather endpoint does not recognise) and Open-Meteo (geocoding) plus
+  `SharedPreferences`. `ui/` renders state from view models. `di/AppContainer.kt` wires it all by hand, so
+  there is one place to swap a piece.
 - **A forecast, in depth.** The hero, the next 24 hours, the 7-day list, a metrics grid, and the sun arc —
   plus three sections the Chinese data source gives us that many apps leave out:
   - **Minutely precipitation** — the radar sampled every few minutes for the next couple of hours, drawn as

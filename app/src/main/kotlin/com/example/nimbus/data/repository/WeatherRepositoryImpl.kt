@@ -27,7 +27,7 @@ class WeatherRepositoryImpl(
     }
 
     override suspend fun fetch(place: Place): Forecast {
-        val response = networkCall { api.forecast(place.name, language()) }
+        val response = networkCall { api.forecast(place, language()) }
         val fetchedAt = Instant.now()
         store.writeCachedForecast(place.id, CachedForecast(fetchedAt.toEpochMilli(), response))
         return response.toDomain(place, fetchedAt)

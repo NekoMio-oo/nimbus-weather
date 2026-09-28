@@ -80,6 +80,7 @@ fun ForecastException.title(): String = stringResource(
         is ForecastException.Offline -> R.string.error_offline_title
         is ForecastException.Timeout -> R.string.error_timeout_title
         is ForecastException.Server -> R.string.error_server_title
+        is ForecastException.LocationNotFound -> R.string.error_location_title
         is ForecastException.Unexpected -> R.string.error_unknown_title
     },
 )
@@ -89,5 +90,6 @@ fun ForecastException.body(): String = when (this) {
     is ForecastException.Offline -> stringResource(R.string.error_offline_body)
     is ForecastException.Timeout -> stringResource(R.string.error_timeout_body)
     is ForecastException.Server -> stringResource(R.string.error_server_body, statusCode)
+    is ForecastException.LocationNotFound -> stringResource(R.string.error_location_body)
     is ForecastException.Unexpected -> stringResource(R.string.error_unknown_body)
 }

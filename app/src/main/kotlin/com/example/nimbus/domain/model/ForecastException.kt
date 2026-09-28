@@ -14,6 +14,9 @@ sealed class ForecastException(message: String, cause: Throwable? = null) : Exce
     /** The service answered with an error status. */
     class Server(val statusCode: Int, cause: Throwable? = null) : ForecastException("server $statusCode", cause)
 
+    /** The service has no weather for this place: the name and its coordinates both came up empty. */
+    class LocationNotFound(cause: Throwable? = null) : ForecastException("location not found", cause)
+
     /** Anything else, including a response the app could not parse. */
     class Unexpected(cause: Throwable? = null) : ForecastException("unexpected", cause)
 }

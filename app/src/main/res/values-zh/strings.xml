@@ -106,6 +106,8 @@
     <string name="error_timeout_body">天气数据未能及时返回，请稍后再试。</string>
     <string name="error_server_title">天气服务出错</string>
     <string name="error_server_body">uapis.cn 返回了状态码 %1$d。</string>
+    <string name="error_location_title">该地点暂无天气</string>
+    <string name="error_location_body">uapis.cn 找不到这个地点，请尝试搜索最近的城市的名称。</string>
     <string name="error_unknown_title">出了点问题</string>
     <string name="error_unknown_body">无法加载天气数据。</string>
     <string name="error_stale">当前显示的是上次保存的预报。</string>

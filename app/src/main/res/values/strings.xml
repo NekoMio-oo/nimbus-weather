@@ -106,6 +106,8 @@
     <string name="error_timeout_body">The forecast did not arrive in time. Try again in a moment.</string>
     <string name="error_server_title">Weather service error</string>
     <string name="error_server_body">uapis.cn answered with status %1$d.</string>
+    <string name="error_location_title">No weather here</string>
+    <string name="error_location_body">uapis.cn has no weather for this place. Try searching for the nearest city.</string>
     <string name="error_unknown_title">Something went wrong</string>
     <string name="error_unknown_body">The forecast could not be loaded.</string>
     <string name="error_stale">Showing the last saved forecast.</string>
